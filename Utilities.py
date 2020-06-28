@@ -2,6 +2,7 @@ import requests
 import pandas
 from bs4 import BeautifulSoup as bs
 
+#Function which fetches the active code information from the AFK website
 def getActiveCodes():
     page = requests.get('https://afk.guide/redemption-codes/')
     soup = bs(page.content, 'html.parser')
@@ -11,6 +12,7 @@ def getActiveCodes():
     rows = table.find_all('tr')
     imgs = table.find_all('img')
 
+    #Get list of alt texts for images
     alts = [img['alt'] for img in table.find_all('img', alt=True)]
     altused = 0
     codes = []
@@ -27,11 +29,13 @@ def getActiveCodes():
             altused+=1
             row[-1][i] = row[-1][i] + ' ' + alt
 
-        #Join rewards list into one string
+        # Join rewards list into one string
         row[-1] = ', '.join(row[-1])
         
         codes.append(row)
-        
+    
+    # Convert codes to a dataframe
     codedf = pandas.DataFrame(codes)
     codedf.columns = ['Codes', 'Rewards']
+    
     return codedf
