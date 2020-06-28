@@ -2,35 +2,6 @@ import requests
 import pandas
 from bs4 import BeautifulSoup as bs
 
-# page = requests.get('https://afk.guide/redemption-codes/')
-
-# print(page)
-
-# soup = bs(page.content, 'html.parser')
-# # print(soup)
-
-# items = soup.find_all('code')
-# print(items)
-
-# codes = [x.get_text() for x in items]
-
-# print(codes)
-
-# codedf = pandas.DataFrame(codes)
-# codedf.columns = ['Codes']
-# print(codedf)
-
-
-# items = soup.find_all('td', style='width: 33.046%;'or'width: 33.046%; height: 26px;')
-# items2 = soup.find_all('td', style='width: 33.046%; height: 26px;')
-
-# print(items)
-# print(items2)
-# rewards = [x.get_text() for x in items]
-# for i in items2:
-#     rewards.append(i.get_text())
-# print(rewards)
-
 def getActiveCodes():
     page = requests.get('https://afk.guide/redemption-codes/')
     soup = bs(page.content, 'html.parser')
