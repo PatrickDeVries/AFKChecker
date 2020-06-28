@@ -1,0 +1,2 @@
+"python" "CheckAFK.py"
+pause
