@@ -14,11 +14,11 @@ newcodedf = pandas.DataFrame(newcodes)
 newcodedf.columns = ['Codes']
 
 oldcodedf = pandas.read_csv('./AFKCodes.csv', index_col=0)
-# print(oldcodedf)    
-# print(newcodedf)
-# init("WDyWEEp5KTQ11MuzvfPg")
+
+# init("PrivateKey")
 # Client("").send_message("Message", "Hello", "26131", "10", "0", "2", "https://www.pushsafer.com", "Open Pushsafer", "0", "2", "60", "600", "1", "", "", "")
-init("WDyWEEp5KTQ11MuzvfPg")
+key = open('PrivateKey.txt')
+init(key.read())
 if newcodedf.equals(oldcodedf):
     Client("").send_message('No new codes today', "AFK Code drop", "26131", "37", "0", "2", "https://afk.guide/redemption-codes/", "Go to codes", "0", "2", "60", "600", "1", "", "", "")
 
