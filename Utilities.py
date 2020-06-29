@@ -45,8 +45,10 @@ def getActiveCodes():
 
 
 def sendNotif(subject, message, sender, destination):
+    # Start connection
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
+    # File containing login info for gmail account that will send messages
     logininfo = open('../devpass.txt')
     lines = logininfo.readlines()
     server.login(lines[0], lines[1])

@@ -27,9 +27,13 @@ else:
             # Build notification message
             message = 'New Code: ' + str(newdata[0][i]) + '\nfor ' + str(newdata[1][i]) 
             message = message + '\n\nCheck codes at: https://afk.guide/redemption-codes/'
-            destination = open('../email.txt').read()
-            # Send email
-            sendNotif('AFK Code Drop', message, 'AFK Bot', destination)
+            
+            # Open list of destination emails from file
+            destinations = open('../emaillist.txt').readlines()     
+            # Send email(s)
+            for dest in destinations:
+                sendNotif('AFK Code Drop', message, 'AFK Bot', dest)
+                
             # Send notification with format (for pushsafer):
             # client.send_message("Message", "Title", "Device or Device Group ID", "Icon", "Sound", "Vibration", "URL", "URL Title", "Time2Live", "Priority", "Retry", "Expire", "Answer", "Image 1", "Image 2", "Image 3")
             # Client("").send_message(message, "AFK Code Drop", "26131", "37", "0", "2", "https://afk.guide/redemption-codes/", "Go to codes", "0", "2", "60", "600", "1", "", "", "")
