@@ -1,5 +1,4 @@
 import pandas
-from pushsafer import init, Client
 from Utilities import getActiveCodes, sendNotif
 import numpy as np
 
@@ -7,16 +6,10 @@ import numpy as np
 newcodedf = getActiveCodes()
 oldcodedf = pandas.read_csv('./AFKCodes.csv', index_col=0)
 
-# init("PrivateKey")
-# Client("").send_message("Message", "Hello", "26131", "10", "0", "2", "https://www.pushsafer.com", "Open Pushsafer", "0", "2", "60", "600", "1", "", "", "")
-
 key = open('PrivateKey.txt')
 init(key.read())
 
-if newcodedf.equals(oldcodedf):
-    pass
-        # Client("").send_message('No new codes today', "AFK Code drop", "26131", "37", "0", "2", "https://afk.guide/redemption-codes/", "Go to codes", "0", "2", "60", "600", "1", "", "", "")
-else:
+if not newcodedf.equals(oldcodedf):
     # Convert data frames to 2d lists for iteration
     newdata = np.vstack((newcodedf['Codes'].to_list(), newcodedf['Rewards'].to_list()))
     olddata = np.vstack((oldcodedf['Codes'].to_list(), oldcodedf['Rewards'].to_list()))
@@ -34,10 +27,6 @@ else:
             for dest in destinations:
                 sendNotif('AFK Code Drop', message, 'AFK Bot', dest)
                 
-            # Send notification with format (for pushsafer):
-            # client.send_message("Message", "Title", "Device or Device Group ID", "Icon", "Sound", "Vibration", "URL", "URL Title", "Time2Live", "Priority", "Retry", "Expire", "Answer", "Image 1", "Image 2", "Image 3")
-            # Client("").send_message(message, "AFK Code Drop", "26131", "37", "0", "2", "https://afk.guide/redemption-codes/", "Go to codes", "0", "2", "60", "600", "1", "", "", "")
-
     newcodedf.to_csv('./AFKCodes.csv')
 
 
