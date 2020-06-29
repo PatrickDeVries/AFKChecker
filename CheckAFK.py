@@ -6,9 +6,6 @@ import numpy as np
 newcodedf = getActiveCodes()
 oldcodedf = pandas.read_csv('./AFKCodes.csv', index_col=0)
 
-key = open('PrivateKey.txt')
-init(key.read())
-
 if not newcodedf.equals(oldcodedf):
     # Convert data frames to 2d lists for iteration
     newdata = np.vstack((newcodedf['Codes'].to_list(), newcodedf['Rewards'].to_list()))
