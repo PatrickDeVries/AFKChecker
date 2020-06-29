@@ -1,6 +1,9 @@
 import requests
 import pandas
 from bs4 import BeautifulSoup as bs
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 #Function which fetches the active code information from the AFK website
 def getActiveCodes():
@@ -39,3 +42,18 @@ def getActiveCodes():
     codedf.columns = ['Codes', 'Rewards']
     
     return codedf
+
+
+def sendNotif(subject, message, sender, destination):
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    logininfo = open('../devpass.txt')
+    lines = logininfo.readlines()
+    server.login(lines[0], lines[1])
+    msg = MIMEMultipart()
+    msg['From'] = sender
+    msg['To'] = destination
+    msg['Subject'] = subject
+    msg.attach(MIMEText(message))
+    server.send_message(msg)
+
