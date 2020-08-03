@@ -18,12 +18,14 @@ if not newcodedf.equals(oldcodedf):
             message = 'New Code: ' + str(newdata[0][i]) + '\nfor ' + str(newdata[1][i]) 
             message = message + '\n\nCheck codes at: https://afk.guide/redemption-codes/'
             
+            oldcodedf.append([str(newdata[0][i])])
             # Open list of destination emails from file
             destinations = open('../emaillist.txt').readlines()     
             # Send email(s)
             for dest in destinations:
                 sendNotif('AFK Code Drop', message, 'AFK Bot', dest)
-                
-    newcodedf.to_csv('./AFKCodes.csv')
+
+      
+oldcodedf.to_csv('./AFKCodes.csv')
 
 
