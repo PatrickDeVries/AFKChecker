@@ -1,10 +1,10 @@
-import pandas
+import pandas as pd
 from Utilities import getActiveCodes, sendNotif
 import numpy as np
 
 
 newcodedf = getActiveCodes()
-oldcodedf = pandas.read_csv('./AFKCodes.csv', index_col=0)
+oldcodedf = pd.read_csv('./AFKCodes.csv', index_col=0)
 
 if not newcodedf.equals(oldcodedf):
     # Convert data frames to 2d lists for iteration
@@ -17,15 +17,16 @@ if not newcodedf.equals(oldcodedf):
             # Build notification message
             message = 'New Code: ' + str(newdata[0][i]) + '\nfor ' + str(newdata[1][i]) 
             message = message + '\n\nCheck codes at: https://afk.guide/redemption-codes/'
-            
-            oldcodedf.append([str(newdata[0][i])])
+            d = {'Codes': [str(newdata[0][i])], 'Rewards': [str(newdata[1][i])]}
+            newVal = pd.DataFrame(data=d)
+            oldcodedf = pd.concat([oldcodedf, newVal], ignore_index=True)
             # Open list of destination emails from file
             destinations = open('../emaillist.txt').readlines()     
             # Send email(s)
             for dest in destinations:
                 sendNotif('AFK Code Drop', message, 'AFK Bot', dest)
 
-      
+# print(oldcodedf)
 oldcodedf.to_csv('./AFKCodes.csv')
 
 
