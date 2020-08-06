@@ -1,5 +1,4 @@
-AFKCodes.csv
-AFKLogo.jpg
-PrivateKey.txt
-Image.txt
+*.csv
+*.jpg
+*.txt
 CheckCodes.bat
