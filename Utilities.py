@@ -53,9 +53,10 @@ def sendNotif(subject, message, sender, destination):
     lines = logininfo.readlines()
     server.login(lines[0], lines[1])
     msg = MIMEMultipart()
+    msg['Subject'] = subject
     msg['From'] = sender
     msg['To'] = destination
-    msg['Subject'] = subject
     msg.attach(MIMEText(message))
-    server.send_message(msg)
-
+    print(msg.as_string())
+    server.sendmail(sender, destination, msg.as_string())
+    server.quit()
