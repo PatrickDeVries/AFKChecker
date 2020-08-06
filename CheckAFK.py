@@ -8,8 +8,8 @@ oldcodedf = pd.read_csv('./AFKCodes.csv', index_col=0)
 
 if not newcodedf.equals(oldcodedf):
     # Convert data frames to 2d lists for iteration
-    newdata = np.vstack((newcodedf['Codes'].to_list(), newcodedf['Rewards'].to_list()))
-    olddata = np.vstack((oldcodedf['Codes'].to_list(), oldcodedf['Rewards'].to_list()))
+    newdata = np.vstack((newcodedf['Codes'].values, newcodedf['Rewards'].values))
+    olddata = np.vstack((oldcodedf['Codes'].values, oldcodedf['Rewards'].values))
 
     # Check for new codes, ignore if one expired
     for i in range(0, len(newdata[0])):
