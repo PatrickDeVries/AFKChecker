@@ -64,5 +64,4 @@ def sendNotif(subject, message, sender, destination):
     msg['To'] = destination
     msg.attach(MIMEText(message))
     server.sendmail(sender, destination, msg.as_string())
-    print("sent mail")
     server.quit()
