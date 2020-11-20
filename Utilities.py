@@ -20,9 +20,9 @@ def getActiveCodes():
 
     codes = []
     for li in lst.find_all('li'):
-        print("{0}: ".format(li.text))
         item = li.text.split('–')
-        codes.append((item[0], item[1]))
+        codes.append((item[0].strip(), item[1].strip()))
+        print('Code: {0}, Reward: {1}'.format(item[0].strip(), item[1].strip()))
 
     # Convert codes to a dataframe
     codedf = pandas.DataFrame(codes)
