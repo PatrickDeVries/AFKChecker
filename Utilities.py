@@ -5,6 +5,8 @@ from bs4 import BeautifulSoup as bs
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import sys
+
 
 #Function which fetches the active code information from the AFK website
 def getActiveCodes():
@@ -21,7 +23,9 @@ def getActiveCodes():
 
     codes = []
     for li in lst.find_all('li'):
-        item = li.text.split('–')
+        li = li.text.encode('utf-8').decode('ascii', 'ignore')
+        print(li)
+        item = li.split('  ')
         codes.append((item[0].strip(), item[1].strip()))
         print('Code: {0}, Reward: {1}'.format(item[0].strip(), item[1].strip()))
 
