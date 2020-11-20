@@ -24,7 +24,6 @@ def getActiveCodes():
     codes = []
     for li in lst.find_all('li'):
         li = li.text.encode('utf-8').decode('ascii', 'ignore')
-        print(li)
         item = li.split('  ')
         codes.append((item[0].strip(), item[1].strip()))
         print('Code: {0}, Reward: {1}'.format(item[0].strip(), item[1].strip()))
